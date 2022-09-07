@@ -96,11 +96,10 @@ f = open(r'D:/Python_Code/A1_TRAINING_NongVanToan/Phase1/data.json', encoding="u
 
 data_import.append(json.load(f))
 
-
+for i in data_import:
 # Add objects article
-article_input =  session.query(Article_input).filter(Article_input.title == data_import['title']).first()
-if not article_input:
-    article_input = Article_input(title = data_import['title'] ,description = data_import['description'], category = data_import['category'],url = data_import['url'] , date_public = data_import['date_public'])
-    session.add(article_input)
-    session.commit()
-
+    article_input =  session.query(Article_input).filter(Article_input.title == i['title']).first()
+    if not article_input:
+        article_input = Article_input(title = i['title'] ,description = i['description'], category = i['category'],url = i['url'] , date_public = i['date_public'])
+        session.add(article_input)
+        session.commit()
